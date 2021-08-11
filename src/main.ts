@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 declare const module: any;
 
 async function bootstrap() {
+  console.log(process.env.DB_DATABASE);
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
