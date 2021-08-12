@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTodoDto } from './dtos/createTodo.dto';
+import { UpdateTodoDto } from './dtos/updateTodo.dto';
 import { Todo } from './entities/todo.entity';
 import { TodoService } from './todo.service';
 
@@ -27,5 +28,12 @@ export class TodoController {
   @Get()
   async getTodos() {
     return await this.todoService.getTodos();
+  }
+  @Put('/:todoId')
+  async updateTodo(
+    @Param() param: { todoId: string },
+    @Body() updateTodoDto: UpdateTodoDto,
+  ) {
+    return await this.todoService.updateTodo(param, updateTodoDto);
   }
 }
